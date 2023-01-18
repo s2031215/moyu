@@ -20,10 +20,12 @@ import (
 var frontend embed.FS
 
 func main() {
-	app := fiber.New(fiber.Config{
+	base := fiber.New(fiber.Config{
 		JSONEncoder: sonic.Marshal,
 		JSONDecoder: sonic.Unmarshal,
 	})
+	baseurl := os.Getenv("BASEURL")
+	app := base.Group("/"+baseurl)
 	app.Use(cors.New())
 
 	app.Use("/ws/*", middleware.UpgradeOptions)
@@ -44,5 +46,5 @@ func main() {
 	host := os.Getenv("HOST")
 	port := os.Getenv("PORT")
 	log.Println(host + ":" + port)
-	log.Fatal(app.Listen(host + ":" + port))
+	log.Fatal(base.Listen(host + ":" + port))
 }
