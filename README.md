@@ -1,3 +1,11 @@
+$${\color{red}** 本版本是基於原版 liuquanhao/moyu 并加入BaseURL以支持 NGINX Reverse Proxy}$$
+
+```bash
+## example.com:80/moyu
+PORT=80 BASEURL=moyu ./backend/moyu
+```
+
+
 # 墨鱼探针
 
 ## 简介
